@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "coffee -c -b *.coffee && node server.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^4.1.0",
+    "body-parser": "^1.18.2",
+    "coffeescript": "^2.2.1",
+    "express": "^4.16.2",
+    "pg": "^7.4.1",
+    "ygojs-data": "git+https://github.com/moecube/ygojs-data.git"
+  }
+}

@@ -1,0 +1,7 @@
+<div class="present-cards-{{this.cards.length}} row">
+  <div class="col" *ngFor="let id of this.cards" >
+    <div class="card-packer">
+      <img class="card-shower" src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg" (mouseenter)="this.mouseEnterCard(id)" (click)="this.selectCard(id)" />
+    </div>
+  </div>
+</div>

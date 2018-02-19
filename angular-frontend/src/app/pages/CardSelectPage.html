@@ -1,0 +1,36 @@
+<div class="container">
+  <TitleBar #title_bar></TitleBar>
+
+  <div *ngIf="this.showWelcomeMessage" style="margin: 40px">
+    <h2>MCPro 北境</h2>
+    <p style="margin-top: 20px">
+      莫问来路，今宵醉；<br />
+      因以月明，未有泪。<br />
+      <br />
+      请<b (click)="this.login()" style="cursor: pointer">登录。</b>
+    </p>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-xs-12">
+      <CardDetail #card_detail></CardDetail>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col">
+          <CardPresent #card_present id="card_present"></CardPresent>
+        </div>
+      </div>
+      <div class="row">
+        <div *ngIf="!this.showWelcomeMessage" class="col" id="card-deck-wrapper">
+            <CardDeck #card_deck id="card-deck"></CardDeck>
+        </div>
+      </div>
+      <div class="row" *ngIf="this.showCongratulationMessage">
+        <div class="col" style="text-align: center; margin-top: 20px">
+          <h3>--游玩愉快--</h3>
+          <button type="button" class="btn btn-danger" (click)="this.dropDeck()">放弃卡组</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

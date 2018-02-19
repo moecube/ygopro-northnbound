@@ -1,0 +1,15 @@
+<div id="deck" class="deck">
+  <label>主卡组：<b>{{this.deck.main.length}}</b></label>
+  <label class="pull-right" id="deckname" (click)="this.sortDeck()">排序</label>
+  <div class="{{this.calculateCssClass(this.deck.main.length, 4)}}">
+    <img *ngFor="let id of this.deck.main" src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg!thumb" (mouseenter)="this.mouseEnterCard(id)" />
+  </div>
+  <label>副卡组：<b>{{this.deck.side.length}}</b></label>
+  <div class="{{this.calculateCssClass(this.deck.side.length, 1)}}">
+    <img *ngFor="let id of this.deck.side" src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg!thumb" (mouseenter)="this.mouseEnterCard(id)" />
+  </div>
+  <label>额外卡组：<b>{{this.deck.ex.length}}</b></label>
+  <div class="{{this.calculateCssClass(this.deck.ex.length, 1)}}">
+    <img *ngFor="let id of this.deck.ex" src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg!thumb" (mouseenter)="this.mouseEnterCard(id)" />
+  </div>
+</div>

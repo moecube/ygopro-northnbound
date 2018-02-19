@@ -1,0 +1,13 @@
+#card_present {
+  margin: 10px;
+}
+
+#card-deck {
+  display: inline-block;
+}
+
+#card-deck-wrapper {
+  display: flex;
+  justify-content: center;
+}
+

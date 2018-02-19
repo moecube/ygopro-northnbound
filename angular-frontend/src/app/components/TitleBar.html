@@ -1,0 +1,14 @@
+<nav class="navbar navbar-light bg-light justify-content-between" style="background-color: #e3f2fd;">
+  <a class="navbar-brand">MCPro Northbound</a>
+  <form class="form-inline">
+    <img *ngIf="this.avatar" class="img-circle" width=24 height=24 src={{this.avatar}} alt="" />
+    <span class="navbar-text">
+      <div *ngIf="this.username">
+        {{this.username}}
+      </div>
+      <div *ngIf="!this.username">
+        请先<a (click)="this.onLoginClick()"><b style="cursor: pointer">登录</b></a>
+      </div>
+    </span>
+  </form>
+</nav>

@@ -1,0 +1,10 @@
+<accordion>
+  <div *ngIf="card">
+    <div class="card-image">
+      <img src="https://ygo233.my-card.in/ygopro/pics/{{card.id}}.jpg" />
+    </div>
+    <accordion-group heading={{this.generateMonsterCardDescription()}} [isOpen]="true">
+      <div [innerHTML]=this.renderCardDesc()></div>
+    </accordion-group>
+  </div>
+</accordion>
