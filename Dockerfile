@@ -13,7 +13,7 @@ RUN npm install
 # 前端配备
 WORKDIR /usr/src/app/angular-frontend
 COPY ./angular-frontend/package.json /usr/src/app/angular-frontend/package.json
-COPY ./angular-frontend/package-lock.json /usr/src/app/angular-frontend/package-lock.json
+# COPY ./angular-frontend/package-lock.json /usr/src/app/angular-frontend/package-lock.json
 RUN npm install
 
 # 文件
