@@ -20,7 +20,7 @@ RUN npm install
 COPY . /usr/src/app/
 
 # 构建
-RUN ng build --prod --base-href /ygopro/northbound/
+RUN npm run build
 
 # 启动
 WORKDIR /usr/src/app
