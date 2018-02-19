@@ -11,6 +11,11 @@ data.Environment.setConfig
 
 server = express()
 
+server.use express.static('angular-frontend/dist')
+server.use (req, res, next) ->
+  res.header "Access-Control-Allow-Origin", "*"
+  next()
+
 server.all '/card/:locale/:id', bodyParser.text({type: "*/*"}), data.Server.expressResponse
 
 server.get '/pick/:player_name/status', (req, res) ->
