@@ -1,6 +1,7 @@
 *.js
 *.js.map
 /node_modules
+/pools
 /decks
 /databases
 pool.json

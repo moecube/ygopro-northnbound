@@ -1,6 +1,6 @@
 Pool = require('pg').Pool
 Data = require('ygojs-data')
-Config = require("./config")
+Config = require("./config.json")
 
 sql_pool = new Pool Config.database
 
