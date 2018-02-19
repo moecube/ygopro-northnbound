@@ -7,7 +7,7 @@ RUN npm install -g coffeescript
 # 后端配备
 WORKDIR /usr/src/app/express-server
 COPY ./express-server/package.json /usr/src/app/express-server/package.json
-COPY ./express-server/package-lock.json /usr/src/app/express-server/package-lock.json
+# COPY ./express-server/package-lock.json /usr/src/app/express-server/package-lock.json
 RUN npm install
 
 # 前端配备
