@@ -19,7 +19,7 @@ export class User {
   }
 
   static setFromSSO(sso: string) {
-    let name = this.getURLParameter('name', sso);
+    let name = this.getURLParameter('username', sso);
     let avatar = this.getURLParameter('avatar_url', sso);
     this.username = name;
     this.avatar = avatar;
