@@ -14,7 +14,7 @@ export class CardDetail {
       this.card = null;
       return;
     }
-    let url = new URL("/card/zh-CN/" + id.toString() , config.pickServerHost.toString());
+    let url = new URL("card/zh-CN/" + id.toString() , config.pickServerHost.toString());
     let response = await fetch(url.toString(), {
       method: 'POST',
       body: JSON.stringify({
