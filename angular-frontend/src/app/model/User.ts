@@ -59,4 +59,12 @@ export class User {
     if (!target) target = window.location.search;
     return decodeURIComponent((new RegExp('[?|&]' + name + '=([^&;]+?)(&|#|;|$)').exec(target) || [null, ''])[1].replace(/\+/g, '%20')) || null;
   }
+
+  static logOut() {
+    this.username = null;
+    this.avatar = null;
+    this.data = null;
+    window.localStorage.removeItem('sso');
+    window.localStorage.removeItem('sig');
+  }
 }

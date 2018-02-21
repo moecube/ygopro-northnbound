@@ -4,6 +4,7 @@ import {CardPresent} from "../components/CardPresent";
 import {CardDeck} from "../components/CardDeck";
 import {Core} from "../model/Core";
 import {User} from "../model/User";
+import {TitleBar} from "../components/TitleBar";
 
 @Component({
   selector: "CardSelectPage",
@@ -14,6 +15,7 @@ export class CardSelectPage implements AfterViewInit, OnInit {
   @ViewChild('card_detail') detail: CardDetail;
   @ViewChild('card_present') present: CardPresent;
   @ViewChild('card_deck') deck: CardDeck;
+  @ViewChild('title_bar') title: TitleBar;
 
   showWelcomeMessage: boolean;
   showCongratulationMessage: boolean;
@@ -28,10 +30,13 @@ export class CardSelectPage implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     if (this.present) {
-      this.present.mouseon = this.MouseOnCard.bind(this);
+      this.present.mouseon = this.mouseOnCard.bind(this);
       this.present.click = this.presentSelectCard.bind(this);
     }
-    this.deck.mouseon = this.MouseOnCard.bind(this);
+    this.deck.mouseon = this.mouseOnCard.bind(this);
+    this.title.onLogin = this.login.bind(this);
+    this.title.onLogout = this.logout.bind(this);
+
     this.Initialize();
   }
 
@@ -40,7 +45,7 @@ export class CardSelectPage implements AfterViewInit, OnInit {
     this.syncFromStatus(Core.playerStatus);
   }
 
-  MouseOnCard(id: number): void {
+  mouseOnCard(id: number): void {
     this.detail.loadCardInfo(id)
   }
 
@@ -79,5 +84,12 @@ export class CardSelectPage implements AfterViewInit, OnInit {
 
   login() {
     User.jump();
+  }
+
+  logout() {
+    User.logOut();
+    this.Initialize();
+    this.present.setValue([]);
+    this.detail.card = null;
   }
 }

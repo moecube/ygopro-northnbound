@@ -10,6 +10,9 @@ export class TitleBar implements AfterViewInit {
   username: string = null;
   avatar: string = null;
 
+  onLogin: () => void = null;
+  onLogout: () => void = null;
+
   ngAfterViewInit(): void {
     if (User.username)
       this.username = User.username;
@@ -18,6 +21,12 @@ export class TitleBar implements AfterViewInit {
   }
 
   onLoginClick(): void {
-    User.jump();
+    if (this.onLogin != null) this.onLogin();
+  }
+
+  onLogoutClick() : void {
+    if(this.onLogout != null) this.onLogout();
+    this.username = null;
+    this.avatar = null;
   }
 }
