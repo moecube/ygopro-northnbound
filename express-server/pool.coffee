@@ -46,22 +46,24 @@ load_pool = ->
     console.log "Warning: No card loaded for pool #{card_pool.name}." if !cards or cards.length == 0
     card_pools.push
       name: card_pool.name
+      num: parseInt card_pool.num
       range: range
       cards: cards
     logistics.maxLength = range.max if range.max > logistics.maxLength
-
+  for card_pool in card_pools
+    card_pool.num = 3 unless card_pool.num
   card_pools
 
-generate_user_pool = (length, num) ->
+generate_user_pool = ->
   index = 1
   pool = []
-  while index < length
+  while index < logistics.maxLength
     index_before_iterator = index
     for card_pool in card_pools
       if index >= card_pool.range.min and index <= card_pool.range.max
         while index <= card_pool.range.max
-          pool[index - 1] = random_select_from_pool card_pool.cards, num
-          index += 1
+          pool[index - 1] = random_select_from_pool card_pool.cards, card_pool.num
+          index += if card_pool.num % 2 == 1 then 1 else card_pool.num / 2
     if index == index_before_iterator
       console.log("No card pool defined for index #{index}")
       pool[index - 1] = []
@@ -86,7 +88,7 @@ module.exports.generate_player = (player_name) ->
     status: 0
     position: 0
     deck: new ygopro.Deck
-    pool: generate_user_pool 40, 3
+    pool: generate_user_pool()
   pg.set_player player_name, player
   player
 

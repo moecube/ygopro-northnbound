@@ -9,14 +9,25 @@ module.exports.next = (player, choice) ->
       player.status = 0
       player.position = 0
     when 0
-      id = player.pool[player.position][choice]
-      card = Data.Environment['zh-CN'][id]
-      if card and card.isEx
-        player.deck.ex.push id
+      pool = player.pool[player.position]
+      player.deck.transformToId()
+      if pool.length % 2 == 1
+        id = pool[choice]
+        card = Data.Environment['zh-CN'][id]
+        if card and card.isEx
+          player.deck.ex.push id
+        else
+          player.deck.main.push id
+        player.position += 1
       else
-        player.deck.main.push id
-      player.deck.transformToId();
-      player.position += 1
+        length = pool.length / 2
+        ids = if choice >= length then pool[length..-1] else pool[0..length - 1]
+        card = Data.Environment['zh-CN'][ids[0]]
+        if card and card.isEx
+          player.deck.ex = player.deck.ex.concat ids
+        else
+          player.deck.main = player.deck.main.concat ids
+        player.position += length
       player.status = 10 if player.position >= module.exports.maxLength
     when 1
       player.deck.main.splice(choice, 1)

@@ -25,6 +25,7 @@ server.get '/pick/:player_name/status', (req, res) ->
     return
   player = await pg.load_player(player_name)
   player = pool.generate_player player_name unless player
+  console.log player.pool
   res.json preprocess player
 
 server.post '/pick/:player_name/next', bodyParser.text({type: "*/*"}), (req, res) ->
