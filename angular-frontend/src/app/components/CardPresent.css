@@ -11,7 +11,7 @@
 }
 
 .card-packer {
-  text-align:center
+  text-align:center;
 }
 
 .card-shower:hover {
@@ -20,4 +20,8 @@
 
 .card-lighter {
   box-shadow: 0 0 15px #ff0; border:1px solid orange;
+}
+
+.card-image {
+  margin: 2px;
 }

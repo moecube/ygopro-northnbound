@@ -9,18 +9,20 @@
       </div>
     </ng-template>
     <ng-template #oddblock>
-      <div class="card-packer col">
-        <div class="col" *ngFor="let id of this.sideCards(0)" >
+      <div class="card-packer col-6 row">
+        <div *ngFor="let id of this.sideCards(0)" [ngClass]="'col-' + 24 / this.cards.length" >
           <img [ngClass]="this.mouseOnSide == -1 ? 'card-lighter' : ''"
+               class="card-image"
                src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
                (mouseenter)="this.mouseEnterCard(id, -1)"
                (mouseleave)="this.mouseLeaveCard()"
                (click)="this.selectCard(id)" />
         </div>
       </div>
-      <div class="card-packer col">
-        <div class="col" *ngFor="let id of this.sideCards(1)" >
+      <div class="card-packer col-6 row">
+        <div *ngFor="let id of this.sideCards(1)" [ngClass]="'col-' + 24 / this.cards.length" >
           <img [ngClass]="this.mouseOnSide == 1 ? 'card-lighter' : ''"
+               class="card-image"
                src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
                (mouseenter)="this.mouseEnterCard(id, 1)"
                (mouseleave)="this.mouseLeaveCard()"
