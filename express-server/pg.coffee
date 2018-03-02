@@ -78,7 +78,6 @@ module.exports.load_player = (player_name) ->
   player
 
 module.exports.save_player = (player) ->
-  console.log "Saving player #{player.name}"
   deck = player.deck.toString()
   await sql_pool.query SAVE_PLAYER_STATUS, [player.name, player.status, player.position, deck]
   values = []
@@ -105,7 +104,6 @@ module.exports.set_player = (player_name, player) ->
 player_cache = new Map
 
 heartBeat = ->
-  console.log "Heartbeat."
   promises = []
   player_cache.forEach (player, player_name) =>
      promises.push module.exports.save_player player

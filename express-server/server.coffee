@@ -5,6 +5,7 @@ path = require 'path'
 pg = require './pg'
 pool = require './pool'
 logistic = require './logistics'
+author = require './author'
 
 data.Environment.setConfig
   databasePath: path.join __dirname, "ygopro-database/locales/"
@@ -17,6 +18,7 @@ server.use (req, res, next) ->
   next()
 
 server.all '/card/:locale/:id', bodyParser.text({type: "*/*"}), data.Server.expressResponse
+server.use '/pick/*', author.authorizeRouter
 
 server.get '/pick/:player_name/status', (req, res) ->
   player_name = req.params.player_name || 'anonymous'
@@ -25,7 +27,6 @@ server.get '/pick/:player_name/status', (req, res) ->
     return
   player = await pg.load_player(player_name)
   player = pool.generate_player player_name unless player
-  console.log player.pool
   res.json preprocess player
 
 server.post '/pick/:player_name/next', bodyParser.text({type: "*/*"}), (req, res) ->
@@ -47,7 +48,7 @@ server.get '/pick/:player_name/sort', (req, res) ->
   player.deck.transformToId()
   res.json preprocess player
 
-server.delete '/:player_name', (req, res) ->
+server.delete '/:player_name', author.authorizeRouter, (req, res) ->
   player_name = req.params.player_name || 'anonymous'
   if player_name == 'anonymous'
     res.end 'not exist'

@@ -1,7 +1,8 @@
 export class User {
   static username: string = null;
   static avatar: string = null;
-  static data: string = "";
+  static token: string = "";
+  static signature: string = "";
 
   static getJumpURI() : string {
     let params: URLSearchParams = new URLSearchParams();
@@ -23,28 +24,32 @@ export class User {
     let avatar = this.getURLParameter('avatar_url', sso);
     this.username = name;
     this.avatar = avatar;
-    this.data = sso;
     return true;
   }
 
   static loadFromLocalStorage() : boolean {
-    let sso: string = window.localStorage.getItem('sso');
-    let sig: string = window.localStorage.getItem('sig');
-    if (sso != null) {
+    let token: string = window.localStorage.getItem('token');
+    let sig: string = window.localStorage.getItem('signature');
+    if (token != null) {
+      let sso = decodeURI(atob(token));
       this.setFromSSO(sso);
+      this.token = token;
+      this.signature = sig;
       return true;
     }
     return false;
   }
 
   static loadFromURL() : boolean {
-    let sso: string = this.getURLParameter('sso', null);
+    let token: string = this.getURLParameter('sso', null);
     let sig: string = this.getURLParameter('sig', null);
-    if (sso != null) {
-      sso = decodeURI(atob(sso));
+    if (token != null) {
+      let sso = decodeURI(atob(token));
       this.setFromSSO(sso);
-      window.localStorage.setItem('sso', sso);
-      window.localStorage.setItem('sig', sig);
+      window.localStorage.setItem('token', token);
+      window.localStorage.setItem('signature', sig);
+      this.token = token;
+      this.signature = sig;
       return true;
     }
     return false;
@@ -63,8 +68,8 @@ export class User {
   static logOut() {
     this.username = null;
     this.avatar = null;
-    this.data = null;
-    window.localStorage.removeItem('sso');
-    window.localStorage.removeItem('sig');
+    this.token = null;
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('signature');
   }
 }
