@@ -30,7 +30,7 @@ export class CardDetail {
     if (!this.card) return "";
     if (this.card.atk != null)
     {
-      return this.card.name + "  " +
+      return this.card.name + "<br />" +
         this.card.attribute + "/" +
         this.card.originLevel + "/" +
         this.card.race + "/" +

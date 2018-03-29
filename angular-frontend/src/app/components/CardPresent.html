@@ -1,33 +1,39 @@
-<div class="present-cards-{{this.cards.length}} row">
+<div class="present-cards" style="white-space: nowrap">
 
   <div *ngIf="this.cards.length % 2 == 0; then oddblock else evenblock"></div>
     <ng-template #evenblock>
+      <div class="row">
       <div class="col" *ngFor="let id of this.cards" >
         <div class="card-packer">
           <img class="card-shower" src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg" (mouseenter)="this.mouseEnterCard(id)" (click)="this.selectCard(id)" />
         </div>
       </div>
+      </div>
     </ng-template>
     <ng-template #oddblock>
-      <div class="card-packer col-6 row">
-        <div *ngFor="let id of this.sideCards(0)" [ngClass]="'col-' + 24 / this.cards.length" >
-          <img [ngClass]="this.mouseOnSide == -1 ? 'card-lighter' : ''"
-               class="card-image"
-               src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
-               (mouseenter)="this.mouseEnterCard(id, -1)"
-               (mouseleave)="this.mouseLeaveCard()"
-               (click)="this.selectCard(id)" />
+      <div class="" style="width: 45%;width: calc(50% - 40px); float: left">
+      <div class="card-container">
+        <div class="card-image-packer" *ngFor="let id of this.sideCards(0)">
+            <img [ngClass]="this.mouseOnSide == -1 ? 'card-lighter' : ''"
+                 class="card-image"
+                 src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
+                 (mouseenter)="this.mouseEnterCard(id, -1)"
+                 (mouseleave)="this.mouseLeaveCard()"
+                 (click)="this.selectCard(id)" />
         </div>
       </div>
-      <div class="card-packer col-6 row">
-        <div *ngFor="let id of this.sideCards(1)" [ngClass]="'col-' + 24 / this.cards.length" >
-          <img [ngClass]="this.mouseOnSide == 1 ? 'card-lighter' : ''"
-               class="card-image"
-               src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
-               (mouseenter)="this.mouseEnterCard(id, 1)"
-               (mouseleave)="this.mouseLeaveCard()"
-               (click)="this.selectCard(id)" />
+      </div>
+      <div class="" style="width: 45%; width: calc(50% - 40px); float: right">
+      <div class="card-container">
+        <div class="card-image-packer" *ngFor="let id of this.sideCards(1)">
+            <img [ngClass]="this.mouseOnSide == 1 ? 'card-lighter' : ''"
+                 class="card-image"
+                 src="https://ygo233.my-card.in/ygopro/pics/{{id}}.jpg"
+                 (mouseenter)="this.mouseEnterCard(id, 1)"
+                 (mouseleave)="this.mouseLeaveCard()"
+                 (click)="this.selectCard(id)" />
         </div>
+      </div>
       </div>
     </ng-template>
 </div>
